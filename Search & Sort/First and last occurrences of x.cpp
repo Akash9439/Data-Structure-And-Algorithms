@@ -9,7 +9,7 @@ Explanation: First occurrence of 5 is at index 2 and last
 using namespace std;
 
  // } Driver Code Ends
-vector<int> find(int arr[], int n , int x )
+/*vector<int> find(int arr[], int n , int x )
 {
     // code here
     int i,j;
@@ -51,4 +51,54 @@ int main()
 }
 
 
-  // } Driver Code Ends
+  // } Driver Code Ends*/
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int n=nums.size();
+        int low=0;
+        int high=n-1;
+        int firstocc=-1;
+        int lastocc=-1;
+        //for first occurnace
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target)
+            {
+                firstocc=mid;
+                high=mid-1;
+            }
+            else if(target>nums[mid])
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        
+        low=0;
+        high=n-1;
+        //for last occurance
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target)
+            {
+                lastocc=mid;
+                low=mid+1;
+            }
+            else if(target>nums[mid])
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+        return {firstocc,lastocc};
+    }
+};
